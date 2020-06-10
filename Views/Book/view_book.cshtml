@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Books.Models.Book>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>keb</h2>
+@foreach (var item in Model)
+{
+    <h2>@Html.DisplayFor(modelItem => item.name)</h2>
+    <h2>@item.price</h2>
+}

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Books.Models.Book>
+@{
+    ViewData["Title"] = "Home Page";
+   
+}
+    
+    <div class="text-center">
+        <h1 class="display-4">Subscription plan @ViewData["pagedata"]</h1>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <p>Choose Plan and Subscribe to Book Listed Catalogue </p>
+        <div class="container">
+            <div class="card-deck mb-3 text-center">
+
+                @foreach (var item in Model)
+                {
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">@item.name</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">R @item.price <small class="text-muted">/ mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+
+
+                                @{
+                                    string textdata = item.text;
+                                    List<string> textdatalist = textdata.Split(',').ToList();
+                                    foreach (string itemtext in textdatalist)
+                                    {
+                                        <li>@itemtext</li>
+                                    }
+                                }
+                            </ul>
+                            <form asp-action="subscribe" asp-controller="Subscription" method="post">
+                                <input value="@item.planId" type="hidden" class="form-control" name="planId" />
+                                <input value="@item.name" type="hidden" class="form-control" name="name" />
+
+                                <input value="@item.price" type="hidden" class="form-control" name="price" />
+                                <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
